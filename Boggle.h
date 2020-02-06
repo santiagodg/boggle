@@ -51,7 +51,6 @@ int Boggle::score() {
   int score = 0;
   for (int wordIndex = 0; wordIndex < dict.size(); wordIndex++) {
     string word = dict[wordIndex];
-    board.unVisitAll();
     if (board.isOnBoard(word)) {
       if (word.length() < 8) {
         score += reward[word.length()];

@@ -33,14 +33,13 @@ class Board {
      */
     bool isOnBoard(string word);
 
-    void unVisitAll();
-
   private:
     vector<vector<Dice> > board;
     int horizontalSize;
     int verticalSize;
 
     bool isOnBoard(string word, int ys, int ye, int xs, int xe);
+    void unVisitAll();
 };
 
 Board::Board() : horizontalSize(4), verticalSize(4) {
@@ -125,11 +124,7 @@ bool Board::isOnBoard(string word, int ys, int ye, int xs, int xe) {
               board[y][x].unVisit();
             }
           } else if (x == horizontalSize - 1) {
-            if (isOnBoard(word.substr(1, word.length() - 1), verticalSize - 2, verticalSize - 1, horizontalSize - 2, horizontalSize - 1)) {
-              return true;
-            } else {
-              board[y][x].unVisit();
-            }
+            return isOnBoard(word.substr(1, word.length() - 1), verticalSize - 2, verticalSize - 1, horizontalSize - 2, horizontalSize - 1);
           }
         }
       }
@@ -139,6 +134,7 @@ bool Board::isOnBoard(string word, int ys, int ye, int xs, int xe) {
 }
 
 bool Board::isOnBoard(string word) {
+  unVisitAll();
   return isOnBoard(word, 0, horizontalSize - 1, 0, verticalSize - 1);
 }
 
