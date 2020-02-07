@@ -4,9 +4,11 @@
 #include <iostream>
 using namespace std;
 
+#include "Dictionary.h"
+
 class Dice {
   public:
-    Dice() : letter(), visitStatus(false) {}
+    Dice() : letter(), visitStatus(false), dict() {}
     // Dice(char input) : letter(input), visited(false) {}
 
     /**
@@ -28,9 +30,14 @@ class Dice {
     bool isVisited();
     char getLetter();
 
+    void setRandomLetter();
+
+    void print();
+
   private:
     char letter;
     bool visitStatus;
+    Dictionary dict;
 };
 
 bool Dice::isVisited() {
@@ -51,6 +58,14 @@ void Dice::visit() {
 
 void Dice::unVisit() {
   visitStatus = false;
+}
+
+void Dice::setRandomLetter() {
+  letter = dict.randomLetter();
+}
+
+void Dice::print() {
+  cout << letter;
 }
 
 #endif

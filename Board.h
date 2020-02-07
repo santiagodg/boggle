@@ -4,9 +4,12 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <random>
+#include <ctime>
 using namespace std;
 
 #include "Dice.h"
+#include "Dictionary.h"
 
 class Board {
   public:
@@ -33,6 +36,8 @@ class Board {
      */
     bool isOnBoard(string word);
 
+    void print();
+
   private:
     vector<vector<Dice> > board;
     int horizontalSize;
@@ -43,11 +48,14 @@ class Board {
 };
 
 Board::Board() : horizontalSize(4), verticalSize(4) {
+  srand(time(0));
   vector<Dice> row;
   for (int rowIndex = 0; rowIndex < 4; rowIndex++) {
     row.clear();
     for (int colIndex = 0; colIndex < 4; colIndex++) {
-      row.push_back(Dice());
+      Dice dice;
+      dice.setRandomLetter();
+      row.push_back(dice);
     }
     board.push_back(row);
   }
@@ -143,6 +151,15 @@ void Board::unVisitAll() {
     for (int colIndex = 0; colIndex < horizontalSize; colIndex++) {
       board[rowIndex][colIndex].unVisit();
     }
+  }
+}
+
+void Board::print() {
+  for (int rowIndex = 0; rowIndex < verticalSize; rowIndex++) {
+    for (int colIndex = 0; colIndex < horizontalSize; colIndex++) {
+      board[rowIndex][colIndex].print();
+    }
+    cout << endl;
   }
 }
 

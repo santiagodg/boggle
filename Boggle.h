@@ -14,19 +14,20 @@ class Boggle {
     Boggle();
 
     void readBoard();
-    void readDictionary(const int &numWords);
+    // void readDictionary(const int &numWords);
     int score();
+
+    void printBoard();
 
   private:
     Board board;
-    vector<string> dict;
+    Dictionary dict;
     map<int, int> reward;
-
-    bool checkWord(string word, int ys, int ye, int xs, int xe);
-
 };
 
-Boggle::Boggle() : board() {
+Boggle::Boggle() {
+  dict = Dictionary();
+  board = Board();
   reward[3] = 1;
   reward[4] = 1;
   reward[5] = 2;
@@ -39,13 +40,14 @@ void Boggle::readBoard() {
   board.readBoard();
 }
 
+/*
 void Boggle::readDictionary(const int &numWords) {
   string word;
   for (int i = 0; i < numWords; i++) {
     cin >> word;
-    dict.push_back(word);
   }
 }
+*/
 
 int Boggle::score() {
   int score = 0;
@@ -61,6 +63,10 @@ int Boggle::score() {
     }
   }
   return score;
+}
+
+void Boggle::printBoard() {
+  board.print();
 }
 
 #endif
